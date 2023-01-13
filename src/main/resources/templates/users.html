@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>List Users</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="templates/js/test.js"></script>
+</head>
+<body>
+<div class="container text-center">
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b></a>
+			<div class="navbar-nav">
+			<form th:action="@{/logout}" method="post">
+			<input type="submit" class="btn btn-light" value="Sign Out" /></form>
+			</div>
+		</nav>
+
+
+	<table class="table table-striped table-bordered">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>E-mail</th>
+			<th>Start Date</th>
+			<th>Hourly Rate</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td >[[${#request.userPrincipal.principal.fullName}]]</td>
+			<td >[[${#request.userPrincipal.principal.Email}]]</td>
+			<td >[[${#request.userPrincipal.principal.Start_date}]]</td>
+			<td >[[${#request.userPrincipal.principal.hourly_rate}]]</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Tracking</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="templates/js/test.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/employee.js"></script>
+</head>
+<body onload="getEmployees()">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+  <div class="navbar-nav">
+    <a class="navbar-brand" href="#">Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b></a>
+    <li class="nav-item">
+      <a th:href="@{/admin}" class="nav-link" >Admin</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="#">TimeTracking</a>
+    </li>
+  </div>
+  <div class="navbar-nav">
+    <li class="nav-item">
+      <form class="form-inline" th:action="@{/logout}" method="post">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Log out</button>
+      </form>
+    </li>
+  </div>
+</nav>
+
+<div class="timetracking" align="center" sec:authorize="hasAuthority('ADMIN')">
+
+  <div>
+    <h2>Time Tracking Employee</h2>
+    <br>
+  </div>
+
+  <table align="center">
+    <tr>
+      <td><b>Name</b></td>
+
+      <td>
+        <select name="user" id="user" class="form-control">
+          <option th:each="user:${listUsers}"
+                  th:value="${user.id}"
+                  th:text="${user.name}">
+          </option>
+        </select>
+      </td>
+
+    </tr>
+    <tr>
+      <td><b>Start Date</b></td>
+      <td><input type="text" id="startDate" value="2020-01-01"></td>
+    </tr>
+    <tr>
+      <td><b>End Date</b></td>
+      <td><input type="text" id="endDate" value="2022-01-01"></td>
+    </tr>
+    <tr>
+      <td><br></td>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input class="btn btn-dark btn-lg btn-block" type="button" value="get hours worked" onClick="getHoursWorked()"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="timetracking" align="center">
+  <h2 id="result">Results</h2>
+</div>
+
+</body>
+</html>

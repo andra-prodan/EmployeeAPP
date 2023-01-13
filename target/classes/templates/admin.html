@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="templates/js/test.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/employee.js"></script>
+</head>
+<body onload="getEmployees()">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+  <div class="navbar-nav">
+  <a class="navbar-brand" href="#">Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b></a>
+    <li class="nav-item active">
+      <a th:href="@{/admin}" class="nav-link" >Admin</a>
+    </li>
+    <li class="nav-item">
+      <a th:href="@{/timetracking}" class="nav-link" >TimeTracking</a>
+    </li>
+  </div>
+  <div class="navbar-nav">
+    <li class="nav-item">
+      <form class="form-inline" th:action="@{/logout}" method="post">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Log out</button>
+      </form>
+    </li>
+  </div>
+</nav>
+<div sec:authorize="hasAuthority('ADMIN')">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th>User ID</th>
+      <th>First Name</th>
+      <th>E-mail</th>
+      <th>Start Date</th>
+      <th>Hourly Rate</th>
+      <th>Edit</th>
+      <th>Delete</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${listUsers}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.Name}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.start_date}"></td>
+      <td th:text="${user.hourly_rate}"></td>
+      <td >
+        <form th:action="@{'/edit/' + ${user.id}}" method="post">
+          <input type="submit" class="btn btn-light" value="Edit" /></form>
+      </td>
+      <td >
+        <form th:action="@{'/delete/' + ${user.id}}" method="post">
+          <input type="submit" class="btn btn-light" value="Delete" /></form>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="button-add">
+<h3><a th:href="@{/add}" class="button-index btn btn-dark btn-block btn-lg">Add</a></h3>
+</div>
+</body>
+</html>

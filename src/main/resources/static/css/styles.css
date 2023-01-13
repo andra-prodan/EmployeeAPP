@@ -1,0 +1,33 @@
+body{
+background-color:#efeeef;
+}
+
+.container-index{
+    padding:10% 35%;
+    text-align:center;
+}
+
+.buttons-index{
+padding-top:10%;
+}
+
+.button-sign{
+margin:auto;
+padding-top:10%;
+}
+
+.sign-up{
+padding:20px 0;
+}
+
+.button-add{
+padding:0 30%;
+}
+
+.admin{
+padding-top:40%;
+}
+
+.timetracking{
+padding-top:3%;
+}

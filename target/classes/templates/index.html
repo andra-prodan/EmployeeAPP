@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Welcome to EmployeeApp</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/styles.css">
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-index">
+		<h1>Welcome to EmployeeApp</h1>
+		<div class="buttons-index row">
+			<div class="col-lg-6">
+		<h3><a th:href="@{/register}" class="button-index btn btn-dark btn-block btn-lg">Register</a></h3>
+			</div>
+		<div class="col-lg-6">
+		<h3><a th:href="@{/login}" class="button-index btn btn-dark btn-block btn-lg">Login</a></h3>
+		</div>
+			<div class="admin col-lg-12">
+				<h3><a th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')" class="button-index btn btn-dark btn-md">Admin</a></h3>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
